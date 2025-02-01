@@ -1,0 +1,8 @@
+<div>
+    <button>
+        <!-- <img src="assets/users/{{selectedUser.avatar}}"/> or with property binding... -->
+        <img [src]="'assets/users/' + selectedUser.avatar" />
+        <span>{{ selectedUser.name }}</span>
+    </button>
+</div>
+
