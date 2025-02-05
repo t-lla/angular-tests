@@ -44,8 +44,7 @@ export class TasksService {
           });
     }
 
-    rermoveTask(id: string) {
+    removeTask(id: string) {
         this.tasks = this.tasks.filter((task) => task.id !== id);
     }
-
 }
