@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, viewChild, ViewChild } from '@angular/core';
 import { ControlComponent } from "../../../shared/control/control.component";
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/button/button.component';
@@ -11,7 +11,8 @@ import { ButtonComponent } from '../../../shared/button/button.component';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent {
-  @ViewChild('form') form?: ElementRef<HTMLFormElement>;  //passing the component/element/template... properties to the 'form' property
+  //@ViewChild('form') form?: ElementRef<HTMLFormElement>;  //passing the component/element/template(#form)... properties to the 'form' property
+  private form = viewChild.required<ElementRef<HTMLFormElement>>('form') //gives a signal
 
   onSubmit(title: string, text: string /*, form:HTMLFormElement*/) {
     // const enteredTitle = titleElement.value;
@@ -19,6 +20,6 @@ export class NewTicketComponent {
     console.log(title);
     console.log(text);
 
-    this.form?.nativeElement.reset();
+    this.form()?.nativeElement.reset();
   }
 }
