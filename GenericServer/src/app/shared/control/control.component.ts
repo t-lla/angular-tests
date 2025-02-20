@@ -1,4 +1,4 @@
-import { Component, contentChild, ContentChild, ElementRef, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, afterNextRender, afterRender, Component, contentChild, ContentChild, ElementRef, HostBinding, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -11,11 +11,26 @@ import { Component, contentChild, ContentChild, ElementRef, HostBinding, input, 
     class: 'control'
   }  
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit{
   // @HostBinding('class') className = 'control';
   label = input.required<string>();
 
   //@ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
   private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
+  constructor() {
+    afterRender(() => {
+      console.log('afterRender') //logs all future changes
+    });
+
+    afterNextRender(() => {
+      console.log('afterNextRender') //will only trigger after every NEXT change
+    });
+  }
+
+  ngAfterContentInit(){
+    console.log('ngAfterContentInit');
+    console.log(this.control);
+  }
 
 }
